@@ -15,7 +15,7 @@
 
 ## Install
 ```bash
-$ git clone https://github.com/kdmatrosov/react-starter.git <my-project-name>
+$ git clone https://github.com/****/vue2-starter.git <my-project-name>
 $ cd <my-project-name>
 $ npm i
 ```
