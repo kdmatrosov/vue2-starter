@@ -1,0 +1,34 @@
+$borderRadius : 7px;
+
+html, body {
+  background-color: #ffffff;
+  color: #363636;
+  font-family: PTS !important;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: PTS !important;
+}
+label {
+  margin: 0;
+}
+
+input[type=text],
+input[type=password] {
+  border-radius: $borderRadius;
+  outline: 0;
+  background-color: #ffffff;
+  height: 2.5rem;
+  padding: 0 0.8571rem;
+  font-size: 1.071rem;;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border: 2px inset rgb(238, 238, 238);
+}
