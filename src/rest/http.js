@@ -12,37 +12,45 @@ function popRequest (req) {
         return req === elem;
     });
     if (index === -1) {
-        console.log('PUT SOME ATTENTION TO THIS AND TELL KIRILL YOU SAW IT!!!');
+        console.log('Write to kdmatrosov@yandex.ru');
         return;
     }
     http.pendingRequests.splice(index, 1);
 }
 
-function RestCreator (settings) {
-    let service = axios.create();
-    //global interceptors
-    service.interceptors.request.use(function (req) {
+const cancelCreator = axios.CancelToken;
+let flushFunc,
+    cancelToken = new cancelCreator((c) => flushFunc = c);
+
+const default_interceptors = [{
+    request: function (req) {
+        req.cancelToken = cancelToken;
         http.pendingRequests.push(req);
         return req;
-    });
-    service.interceptors.response.use(function (response) {
+    },
+    response: function (response) {
         popRequest(response.config);
         return response.data;
-    }, function (error) {
-        let urls_to_exit = [''];
-        let rejection = error.response;
+    },
+    error: function (error) {
         popRequest(error.config);
-        if (rejection &&
-            (ERROR_STATUSES.some(function (err) {
-                return rejection.status === err
-            })
-            || (rejection.status === -1 && urls_to_exit.includes(rejection.config.url)))) {
-            // router.push('');
-        }
+        router.push('login');
+        console.log('logout', error, error.response, error.request, error.message, error.config);
         return Promise.reject(error);
+    }
+}];
+function RestCreator (settings) {
+    let service = axios.create({
+        responseType: 'json',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain'
+        }
     });
-
-    //global custom functions
+    service.flush = function () {
+        flushFunc();
+        cancelToken = new cancelCreator((c) => flushFunc = c);
+    };
     service.upload = function (url, data, config) {
         config.headers['Content-Type'] = undefined;
         return service.post(url, data, config);
@@ -50,8 +58,11 @@ function RestCreator (settings) {
 
     //applying settings
     service.defaults.baseURL = settings.baseURL || '';
-    service.interceptors.request.use(settings.request);
-    service.interceptors.response.use(settings.response, settings.error);
+    settings.interceptors || (settings.interceptors = []);
+    default_interceptors.concat(settings.interceptors).forEach(inter => {
+        service.interceptors.request.use(inter.request);
+        service.interceptors.response.use(inter.response, inter.error);
+    });
 
     this[settings.name] = service;
     return this;

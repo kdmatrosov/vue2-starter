@@ -1,6 +1,6 @@
 {
   "name": "vue2-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue2, Vuex, Vue-Router, Webpack 2, PostCss",
   "main": "index.js",
   "scripts": {

@@ -3,15 +3,17 @@ http
     .rest({
         name: 'main',
         baseURL: `main/`,
-        request: function (request) {
+        interceptors: [{
+            request: function (request) {
 
-            console.log(request);
-            return request;
-        },
-        response: function (response) {
-            console.log('main res', response);
-            return response;
-        }
+                console.log(request);
+                return request;
+            },
+            response: function (response) {
+                console.log('main res', response);
+                return response;
+            }
+        }]
     });
 
 export default http;
