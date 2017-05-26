@@ -10,7 +10,7 @@ config
         publicPath: '/',
         filename: '[name].js'
     })
-    .expand('devtool', 'source-map')
+    .expand('devtool', '#eval-source-map')
     .expand('watch', NODE_ENV === 'watch')
     .expand('watchOptions', {
         aggregateTimeout: 100
