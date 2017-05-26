@@ -17,7 +17,7 @@ config
     })
     .expand('devServer', {
         historyApiFallback: true,
-        port: 4000,
+        port: 5000,
         contentBase: './',
         inline: true,
         hot: false
