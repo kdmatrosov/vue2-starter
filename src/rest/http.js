@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router/index'
 import { ERROR_STATUSES } from './config';
 
 //Basic global ultimate object
