@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Test from '@/components/Test.vue';
+import Index from '@/routes/index';
 import NotFoundComponent from '@/routes/common/404.vue';
 Vue.use(Router);
 
@@ -12,7 +12,7 @@ export default new Router({
         {
             path: '/',
             name: 'index',
-            component: Test
+            component: Index
         },
         {
             path: '*', redirect: '/404'
