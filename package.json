@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "better-npm-run dev",
     "build": "better-npm-run build",
-    "test": "better-npm-run test",
-    "test:watch": "better-npm-run test:watch"
+    "e2e": "better-npm-run e2e",
+    "unit": "better-npm-run unit",
+    "unit:watch": "better-npm-run unit:watch"
   },
   "betterScripts": {
     "dev": {
@@ -22,13 +23,16 @@
         "NODE_ENV": "production"
       }
     },
-    "test": {
+    "e2e": {
+      "command": "testcafe firefox test/e2e/specs/ --app \"npm run dev\" --app-init-delay 20000 -S -s test/e2e/screenshots"
+    },
+    "unit": {
       "command": "karma start ./test/unit/karma.conf.js --single-run --quiet; exit 0",
       "env": {
         "NODE_ENV": "test"
       }
     },
-    "test:watch": {
+    "unit:watch": {
       "command": "karma start ./test/unit/karma.conf.js",
       "env": {
         "NODE_ENV": "test"
@@ -92,6 +96,7 @@
     "postcss-short-color": "^2.0.1",
     "precss": "^1.4.0",
     "style-loader": "^0.16.1",
+    "testcafe": "^0.16.2",
     "url-loader": "^0.5.8",
     "vue-loader": "^11.1.4",
     "vue-style-loader": "^2.0.4",
