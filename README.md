@@ -12,6 +12,9 @@
 * [webpack](https://github.com/webpack/webpack)
 * [babel](https://github.com/babel/babel)
 * [postcss](https://github.com/postcss/postcss)
+* [testcafe](https://github.com/DevExpress/testcafe)
+* [jasmine](https://github.com/jasmine/jasmine)
+* [karma](https://github.com/karma-runner/karma)
 
 ## Install
 ```bash
@@ -24,9 +27,10 @@ $ npm i
 |`npm run <script>`|Description|
 |------------------|-----------|
 |`build`| Builds your application to `build` folder.|
-|`dev`| Serves your application at `localhost:4000` with auto-rebuild.|
-|`test`|Runs unit tests with Karma and Jasmine.|
-|`test:watch`| Runs Karma and watches for changes to re-run tests.|
+|`dev`| Serves your application at `localhost:5000` with auto-rebuild.|
+|`e2e`|Runs e2e tests with TestCafe.|
+|`unit`|Runs unit tests with Karma and Jasmine.|
+|`unit:watch`| Runs Karma and watches for changes to re-run tests.|
 
 ## Sources
 * [Vue.js](https://vuejs.org/)
