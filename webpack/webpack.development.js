@@ -3,6 +3,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 console.log(`--${NODE_ENV}`);
 const resolve = require('./resolve');
+const devServer = require('./devServer');
 let config = require('./webpack.config');
 config
     .expand('output', {
@@ -15,13 +16,7 @@ config
     .expand('watchOptions', {
         aggregateTimeout: 100
     })
-    .expand('devServer', {
-        historyApiFallback: true,
-        port: 5000,
-        contentBase: './',
-        inline: true,
-        hot: false
-    })
+    .expand('devServer', devServer)
     .plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
         name: 'common'

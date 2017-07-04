@@ -1,3 +1,6 @@
 /.idea/
 /node_modules/
 /bundle/
+/firefox_root/
+/test/e2e/screenshots/
+/karma-*/
