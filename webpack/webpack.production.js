@@ -11,9 +11,6 @@ config.expand('output', {
         filename: '[name].js'
     }
 ).plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'common'
-    }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCSSPlugin({

@@ -18,9 +18,6 @@ config
     })
     .expand('devServer', devServer)
     .plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'common'
-    }),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'index.html',

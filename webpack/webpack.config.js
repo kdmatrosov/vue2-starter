@@ -4,14 +4,22 @@ const rules = require('./rules');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const resolve = require('./resolve');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const vendor = [
+    'vue', 'vue-router', 'vuex',
+    'axios', 'lodash', 'jquery'
+];
 module.exports = {
     entry: {
-        'index': './src/index.js',
+        index: './src/index.js',
+        vendor: vendor
     },
     module: {
         rules: rules
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'common']
+        }),
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin({filename: '[name].css', allChunks: true, disable: NODE_ENV === 'watch'}),
         new webpack.DefinePlugin({
