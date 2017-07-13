@@ -5,3 +5,4 @@
 /test/e2e/screenshots/
 /karma-*/
 /build/
+/webpack/devServer.js
