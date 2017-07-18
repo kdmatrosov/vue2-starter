@@ -1,37 +1,18 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const resolve = require('./resolve');
-
-module.exports = [
+const controlStyles = require('./controlStyles');
+const isProduction = process.env.NODE_ENV === 'production';
+const STYLE_OPTIONS = {
+    ExtractTextPlugin: isProduction, options: {
+        minimize: isProduction,
+        sourceMap: !isProduction
+    }
+};
+const RULES = [
     {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-            loaders: {
-                css: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                minimize: process.env.NODE_ENV === 'production',
-                                sourceMap: process.env.NODE_ENV !== 'production'
-                            }
-                        }
-                    ],
-                    fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-                }),
-                postcss: ExtractTextPlugin.extract({
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                minimize: process.env.NODE_ENV === 'production',
-                                sourceMap: process.env.NODE_ENV !== 'production'
-                            }
-                        }
-                    ],
-                    fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-                })
-            }
+            loaders: controlStyles.cssLoaders(STYLE_OPTIONS)
         }
     },
     {
@@ -43,23 +24,6 @@ module.exports = [
     {
         test: /\.html$/,
         loader: 'html-loader'
-    },
-    {
-        test: /\.pcss$/,
-        loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            loader: [
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1
-                    }
-                },
-                {
-                    loader: 'postcss-loader'
-                }
-            ]
-        })
     },
     {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -81,4 +45,5 @@ module.exports = [
             publicPath: './assets/'
         }
     }
-];
+].concat(controlStyles.styleLoaders(STYLE_OPTIONS));
+module.exports = RULES;
