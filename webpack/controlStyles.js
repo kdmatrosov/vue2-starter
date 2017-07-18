@@ -21,7 +21,7 @@ exports.cssLoaders = function (options) {
                 })
             })
         }
-        if (options.extract) {
+        if (options.ExtractTextPlugin) {
             return ExtractTextPlugin.extract({
                 use: loaders,
                 fallback: 'vue-style-loader'
