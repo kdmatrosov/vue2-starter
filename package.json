@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "better-npm-run dev",
+    "watch": "better-npm-run watch",
     "build": "better-npm-run build",
     "e2e": "better-npm-run e2e",
     "unit": "better-npm-run unit",
@@ -13,6 +14,12 @@
   "betterScripts": {
     "dev": {
       "command": "webpack-dev-server --config ./webpack/webpack.development.js",
+      "env": {
+        "NODE_ENV": "watch"
+      }
+    },
+    "watch": {
+      "command": "webpack --config ./webpack/webpack.development.js",
       "env": {
         "NODE_ENV": "watch"
       }
