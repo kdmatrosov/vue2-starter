@@ -35,8 +35,11 @@ const default_interceptors = [{
     },
     error: function (error) {
         popRequest(error.config);
-        router.push('login');
-        console.log('logout', error, error.response, error.request, error.message, error.config);
+        console.log('http error', error, {error}, error.response, error.request, error.message, error.config);
+        if (axios.isCancel(error)) {
+            console.log('isCancel');
+            error.isCancel = true;
+        }
         return Promise.reject(error);
     }
 }];
@@ -50,6 +53,7 @@ function RestCreator (settings) {
     });
     service.flush = function () {
         flushFunc();
+        http.pendingRequests = [];
         cancelToken = new cancelCreator((c) => flushFunc = c);
     };
     service.upload = function (url, data, config) {
