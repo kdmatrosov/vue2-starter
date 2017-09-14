@@ -21,7 +21,6 @@ module.exports = {
             browsers: ['last 5 versions', '> 5%']
         },
         'precss': {},
-        'postcss-calc': {},
-        'postcss-each': {}
+        'postcss-calc': {}
     }
 };

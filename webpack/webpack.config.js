@@ -2,8 +2,10 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const rules = require('./rules');
 const NODE_ENV = process.env.NODE_ENV || 'development';
+console.log(`--${NODE_ENV}`);
 const resolve = require('./resolve');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vendor = [
     'vue', 'vue-router', 'vuex',
     'axios', 'lodash', 'jquery'
@@ -25,7 +27,13 @@ module.exports = {
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
-        new WebpackCleanupPlugin()
+        new WebpackCleanupPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'index.html',
+            inject: true,
+            hash: true
+        })
     ],
     resolve: {
         extensions: ['.js', '.vue', '.json'],

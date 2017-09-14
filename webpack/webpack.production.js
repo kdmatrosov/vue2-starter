@@ -1,10 +1,7 @@
 const webpack = require('webpack');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-console.log(`--${NODE_ENV}`);
 const resolve = require('./resolve');
 let config = require('./webpack.config');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 config.expand('output', {
         path: resolve('/build'),
         publicPath: '/',
@@ -24,11 +21,6 @@ config.expand('output', {
             drop_console: true,
             unsafe: true
         }
-    }),
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'index.html',
-        inject: true
     })
 );
 delete config.expand;
