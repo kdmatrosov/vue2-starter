@@ -44,6 +44,10 @@ const default_interceptors = [{
     }
 }];
 function RestCreator (settings) {
+
+    if (['pendingRequests', 'rest'].includes(settings.name)) {
+        return this;
+    }
     let service = axios.create({
         responseType: 'json',
         headers: {
